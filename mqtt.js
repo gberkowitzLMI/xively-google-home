@@ -22,3 +22,7 @@ exports.connectMQTT = function(){
          console.log(err);
    });
 }
+
+exports.publishMessage = function(power){
+      client.publish(topicPrefix,power);
+}

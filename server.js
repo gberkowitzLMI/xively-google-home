@@ -7,6 +7,20 @@ var mqttClient = require('./mqtt.js');
 app.set('port', (process.env.PORT || 5000));
 server.listen(app.get('port'));
 
+var turnLightOff = function(callback){
+
+}
+
+var turnLightOn = function(callback){
+    mqttClient.publishMessage(1)
+}
+
 app.get('/deviceControl',function(req,res){
-    res.send("Boing!");
+    var powerState = req.query["power"];
+    if(powerState)
+        mqttClient.publishMessage(1);
+    else
+        mqttClient.publishMessage(0);
+
+    res.end();
 });
