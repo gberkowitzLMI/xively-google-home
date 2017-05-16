@@ -15,7 +15,7 @@ var client = mqtt.connect({
    password: password
 });
 
-exports.connectMQTT = function(req, res) {
+exports.connectMQTT = function(){
    client.on('connect', function() {
       client.subscribe(topicPrefix);
       }, function(err) {
