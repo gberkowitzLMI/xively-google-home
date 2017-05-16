@@ -5,24 +5,26 @@ var host = config.mqtt.host;
 var port = config.mqtt.port;
 var username = config.mqtt.username;
 var password = config.mqtt.password;
-var topicPrefix = config.mqtt.topic;
 
-var client = mqtt.connect({
-   host: host,
-   port: port,
-   clientId: username,
+var client = mqtt.connect(host,{
    username: username,
-   password: password
+   password: password,
+   rejectUnauthorized: false //not for production
 });
 
-exports.connectMQTT = function(){
-   client.on('connect', function() {
-      client.subscribe(topicPrefix);
-      }, function(err) {
-         console.log(err);
-   });
-}
+client.on('connect', function() {
+      console.log('connected');
+}, function(err) {
+      console.log(err);
+});
 
-exports.publishMessage = function(power){
-      client.publish(topicPrefix,power);
-}
+client.on('disconnect',function(){
+      console.log("MQTT disconnected");
+});
+
+client.on('error', function(err){
+      console.log(err);
+});
+
+
+module.exports = client;
