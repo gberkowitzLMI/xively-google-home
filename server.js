@@ -12,6 +12,15 @@ server.listen(app.get('port'));
 app.post('/gAssistant', function(req,res){
     console.log("here");
     console.log(req)
+    var responseData = {
+        speech: "Here's some info",
+        displayText: "Displaying some info",
+        data: {"google":{"is_ssml":true,"no_input_prompts":[]}},
+        contextOut: [],
+        source: "",
+        followupEvent: {}
+    };
+    res.send(responseData)
 })
 
 app.get('/deviceControl',function(req,res){
