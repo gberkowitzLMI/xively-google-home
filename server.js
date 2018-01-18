@@ -12,8 +12,8 @@ server.listen(app.get('port'));
 
 
 app.post('/gAssistant', function(req,res){
-    console.log(req.body.data.user)
-    console.log(req.body.contexts)
+    console.log(req.body.originalRequest.data.user)
+    console.log(req.body.originalRequest.result.contexts)
     var responseData = {
         speech: "Here's some info",
         displayText: "Displaying some info",
